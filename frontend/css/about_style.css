@@ -1,0 +1,353 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Plus+Jakarta+Sans:wght@300;400;700&family=Poppins:wght@300;400;700&display=swap');
+
+:root{
+  --titulo: 'Pacifico', cursive;
+  --subtitulos: 'Plus Jakarta Sans', sans-serif;
+  --texto: 'Poppins', sans-serif;
+  --primary2: #488FDD;
+  --primary1: #3781E3;
+  --accent: #75A4DA;
+  --BG1: #A5C8F3;
+  --BG2: #AECEF4;
+  --BG3: #CADFF8;
+  --text: #00214D;
+}
+html{
+  background-color:var(--text);
+}
+main{
+  min-height: calc( 100vh - 58.39px - 91.95px);
+  font-family: var(--texto);
+}
+#about-section{
+    margin: 7%;
+    padding: 0%;
+    border:0%;
+    box-sizing: border-box;
+}
+.fondo{
+  margin-top: 20px;
+  background-image: url(/img/back1.jpg);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: auto;
+  background-repeat: no-repeat;
+}
+.flex_us{
+    display: flex;
+}
+
+.box_about_us{
+    background-color:var(--BG3);
+    height: 210px;
+    width: 600px;
+    border-radius: 30px;
+    padding-left: 20px;
+    margin: 100px;
+    text-align: left;
+}
+.box_about_us h1{
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.circle_us{
+    border-radius: 50%;
+    padding: 50px;
+    margin: -220px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    height: 200px;
+    width: 200px;
+    display: flex;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.circle_us_left{
+    border-radius: 50%;
+    padding: 50px;
+    margin-left: -800px;
+    margin-bottom: 110px;
+    margin-top: -150px;
+    height: 200px;
+    width: 200px;
+    display: flex;
+}
+
+.box_about_us_left{
+    background-color:var(--BG3) ;
+    height: 250px;
+    width: 500px;
+    border-radius: 6%;
+    padding-left: 20px;
+    margin-left: 500px;
+    text-align: right;
+}
+
+.box_about_team{
+  background-color:var(--BG3);
+  height: 250px;
+  width: 500px;
+  border-radius: 6%;
+  padding-left: 16px;
+  margin: 100px;
+  text-align: left;
+}
+
+.text_us{
+    line-height:25px ;
+    font-size: 16.5px;
+    color: var(--text);
+    font-family: var(--texto);
+    font-weight:100;
+    letter-spacing: 1.1px;
+    padding: 40px;
+}
+.text_us section{
+  width: 95%;
+}
+.text_equipo{
+  border-radius: 30px;
+  color:var(--BG3);
+  margin-left: 45px;
+  margin-top: -52.6px;
+  letter-spacing: 20px;
+  font-size: 100px;
+  background-color: var(--text);
+  padding: 10px;
+}
+ header{
+  margin: 0 auto;
+  font-family: var(--titulo);
+}
+
+header a{
+  color: var(--BG3);
+}
+
+.header{
+  width: 100%;
+  z-index: 3;
+  margin-top: 1.5%;
+}
+
+.header ul{
+  width: 75%;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+}
+.header ul li{
+  margin: 0 auto;
+}
+.header ul li a  {
+  text-align:center;
+  display: block;
+  text-decoration: none;
+  font-family: var(--subtitulos);
+  color: var(--BG3);
+  font-weight: 700;
+  padding: 5px;
+}
+.container-register .btn-registrarse{
+  margin: 0 auto;
+  text-align: center;
+  background-color: var(--primary1);
+  border-radius: 20px;
+  color: white;
+  font-weight: 700;
+  width: 40%;
+  padding: 10px;
+}
+.container-register .btn-registrarse:hover{
+  background-color: var(--BG3);
+  color: var(--text);
+}
+
+.header ul li a:hover{
+  color: var(--primary1);
+}
+
+
+header .logo-nav{
+  text-align: center;
+  float: left;
+  display: flex;
+  font-size: 20px;
+  text-decoration: none;
+  font-family: var(--titulo);
+  width: 23%;
+  justify-content: center;
+}
+
+
+.header .menu{
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+}
+
+.header .menu-icon{
+ padding-top: 20px;
+ margin-left: 20px;
+ margin-right:10px;
+ position: relative;
+ float: right;
+ cursor: pointer;
+}
+
+.header .menu-icon .nav-icon{
+  background: var(--text);
+  display: block;
+  height: 2px;
+  width: 18px;
+  position: relative;
+  transition: background .2s ease-out;
+}
+
+.header .menu-icon .nav-icon:before{
+  background: var(--text);
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  top: 5px;
+}
+
+.header .menu-icon .nav-icon:after{
+  background: var(--text);
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: -5px;
+  transition: all .2s ease-out;
+  }
+
+.header .menu-btn {
+  display: none;
+} 
+
+.header .menu-btn:checked ~ .menu{
+  max-height: 270px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .nav-icon{
+ background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .nav-icon:before{
+ transform: rotate(-45deg);
+  top: 0;
+}
+
+.header .menu-btn:checked ~ .menu-icon .nav-icon:after{
+  transform: rotate(45deg);
+  top: 0;
+}
+/*footer*/
+footer{
+  font-family: var(--subtitulos);
+  color: var(--text);
+  background-color: var(--BG3);
+  padding: 40px;
+}
+footer section{
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(100%, 1fr)
+  );
+  justify-items: center;
+}
+footer section div{
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  text-align: center;
+}
+footer section div a{
+  padding: 10px;
+  text-decoration: none;
+  color: var(--text);
+}
+footer section div a:hover{
+  color: var(--primary2);
+  font-weight: 700;
+}
+footer section div p{
+  padding: 10px;
+}
+
+.title-footer{
+  font-weight: 100;
+  letter-spacing: 2px;
+  font-family: var(--titulo);
+}
+@media (min-width: 1280px){
+  /*NAVEGACION*/
+  .header ul{
+    display: flex;
+    align-items: center;
+  }  
+  .header .menu{
+    margin-top: 1.5%;
+    clear: none;
+    max-height: none;
+  }
+  
+  .header .menu-icon{
+    display: none;
+  }
+  .container-register .btn-registrarse{
+    margin: 0 auto;
+    text-align: center;
+    background-color: var(--primary1);
+    border-radius: 20px;
+    color: white;
+    font-weight: 700;
+    width: 100%;
+    padding: 20px;
+  }
+  /*REGISTRO*/
+  .from-section .resgistro-campo-submit {
+    width: 25%;
+    
+  }
+  .container-contact{
+    margin: 0 auto;
+    width: 30%;
+    padding-top: 50px;
+  }
+
+  /*LOGIN*/
+  .login-container{
+    margin: 0 auto;
+    width: 30%;
+  }
+  .datos form input{
+    margin: 15px auto;
+    width: 100%;
+  }
+
+  .boton-login{
+    width: 50%;
+  }
+
+  /*foooter*/
+  footer section{
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(20%, 1fr)
+    );
+    justify-items: center;
+  }
+}
+ 

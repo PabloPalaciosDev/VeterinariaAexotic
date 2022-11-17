@@ -34,7 +34,8 @@ public class MascotasDB {
                     result.getString("nom_masc"),
                     result.getString("tamaño"),
                     result.getString("genero"),
-                    result.getString("ced_clien")
+                    result.getString("ced_clien"),
+                    result.getString("fecha_nac")
                 );
 
                 mascotas.add(mascota);
@@ -54,10 +55,10 @@ public class MascotasDB {
         int resultado = 0;
         try {
             Statement stm = _cn.createStatement();
-            String query = "INSERT INTO (nom_masc,peso,tamaño,genero,cod_raza,ced_clien)" 
-            + "values('"+mascota.getNom_masc()+"',"+mascota.getPeso()+",'"+
-            mascota.getTamaño()+"','"+mascota.getGenero()+"',"+
-            mascota.getCod_raza()+",'"+mascota.getCed_clien()+"')";
+            String query = "INSERT INTO Mascota (cod_raza,peso,nom_masc,tamaño,genero,ced_clien,fecha_nac)" 
+            + "values("+mascota.getCod_raza()+","+mascota.getPeso()+",'"+mascota.getNom_masc()+"','"+
+            mascota.getTamaño()+"','"+
+            mascota.getGenero()+"','"+mascota.getCed_clien()+"','"+mascota.getFecha_nac()+"')";
 
             resultado = stm.executeUpdate(query);
             return resultado;

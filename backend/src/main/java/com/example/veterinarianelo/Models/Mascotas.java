@@ -5,10 +5,10 @@ import java.util.List;
 public class Mascotas {
     private int cod_masc,cod_raza;
     private float peso;
-    private String nom_masc,tamaño,genero,ced_clien;
+    private String nom_masc,tamaño,genero,ced_clien,fecha_nac;
 
     public Mascotas(int cod_masc, int cod_raza, float peso, String nom_masc, String tamaño, String genero,
-            String ced_clien) {
+            String ced_clien, String fecha_nac) {
         this.cod_masc = cod_masc;
         this.cod_raza = cod_raza;
         this.peso = peso;
@@ -16,6 +16,7 @@ public class Mascotas {
         this.tamaño = tamaño;
         this.genero = genero;
         this.ced_clien = ced_clien;
+        this.fecha_nac = fecha_nac;
     }
 
 
@@ -68,6 +69,16 @@ public class Mascotas {
 
 
     public void add(List<Mascotas> mascota) {
+    }
+
+
+    public String getFecha_nac() {
+        return fecha_nac;
+    }
+
+
+    public void setFecha_nac(String fecha_nac) {
+        this.fecha_nac = fecha_nac;
     }
 
     

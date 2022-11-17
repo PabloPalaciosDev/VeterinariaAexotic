@@ -67,4 +67,17 @@ public class MascotasDB {
         }
         return resultado;
     }
+
+    public int EliminarMascotas(int cod_masc){
+        int resultado = 0;
+        try {
+            Statement stmt = _cn.createStatement();
+            String query = "DELETE FROM Mascota WHERE cod_masc = "+cod_masc+"";
+
+            return stmt.executeUpdate(query);
+        } catch (SQLException e) {
+            int x = 1;
+        }
+        return resultado;
+    }
 }

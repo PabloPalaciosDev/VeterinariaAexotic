@@ -1,6 +1,8 @@
 package com.example.veterinarianelo.Controllers;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,5 +24,10 @@ public class MascotasController {
     public int InsertarMascota(@RequestBody Mascotas mascota){
         int x = 1;
         return new MascotasDB().InsertarMascotas(mascota);
+    }
+
+    @DeleteMapping("/mascotas/{cod_masc}")
+    public int Delete(@PathVariable("cod_masc") int cod_masc){
+        return new MascotasDB().EliminarMascotas(cod_masc);
     }
 }

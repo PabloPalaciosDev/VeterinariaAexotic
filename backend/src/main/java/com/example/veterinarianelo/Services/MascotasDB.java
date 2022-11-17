@@ -68,6 +68,27 @@ public class MascotasDB {
         return resultado;
     }
 
+    public int ActualizarMascotas(Mascotas mascota){
+        int resultado = 0;
+        try {
+            Statement stm = _cn.createStatement();
+            String query = "UPDATE Mascota"+
+            " SET peso = "+mascota.getPeso()+
+            ", nom_masc = '"+mascota.getNom_masc()+
+            "', tamaño = '"+mascota.getTamaño()+
+            "', genero = '"+mascota.getGenero()+
+            "', ced_clien = '"+mascota.getCed_clien()+
+            "', fecha_nac = '"+mascota.getFecha_nac()+
+            "' WHERE cod_masc = "+mascota.getCod_masc()+""; 
+
+            resultado = stm.executeUpdate(query);
+            return resultado;
+        } catch (SQLException e) {
+            int x =1;
+        }
+        return resultado;
+    }
+
     public int EliminarMascotas(int cod_masc){
         int resultado = 0;
         try {

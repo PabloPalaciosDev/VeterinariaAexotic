@@ -44,7 +44,7 @@ public class MascotasDB {
             result.close();
             stnt.close();
             return mascotas;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("ocurrio una excepcion en mascotasDB");
             int x = 1;
         }

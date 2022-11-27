@@ -11,6 +11,7 @@
   --BG2: #AECEF4;
   --BG3: #CADFF8;
   --text: #00214D;
+  --blanco: #ffff;
 }
 
 * {
@@ -657,30 +658,31 @@ footer section div a:hover, footer section div p:hover{
   justify-self: end;
   background-color: #3781E3;
   border-radius: 5px;
+  font-family: var(--texto);
+  padding: 5px;
+  font-weight: 700;
+}
+.buscar-boton:hover{
+  background-color: var(--text);
 }
 .animales-exoticos{
-  margin-top: 50px;
-  display: flex;
-  justify-content:center;
-  gap: 10%;
-}
-.animales-exoticos > section>img{
-  width: 300px;
-  height: 200px;
-  border-radius: 5px;
-  justify-self: center;
-  margin-top: 20px;
-}
-.animales-exoticos>section{
-  background-color: white;
-  width: 350px;
-  height: 300px;
+  padding: 10px;
+  margin: 0 auto;
   display: grid;
-  justify-content: center;
-  border-radius: 5px;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      200px,1fr)
+  );
+  gap: 15px;
+  width: 80%;
 }
-.animales-exoticos>section>p{
-  width: 300px;
+.busquedas-container{
+  padding: 20px ;
+  font-family: var(--texto);
+  text-align: center;
+  background-color: var(--blanco);
+  border-radius: 10px;
 }
 
 

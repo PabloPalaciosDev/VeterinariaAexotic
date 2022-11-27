@@ -9,7 +9,7 @@ public class Conexion {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
             String connectionUrl = "jdbc:sqlserver://localhost:1433;"
-            + "databaseName=VeterinariaNelo;"
+            + "databaseName=VeterinariaAexotic;"
             + "user=sa;"
             + "password=KKdeperro123;"
             + "trustServerCertificate=true";

@@ -708,6 +708,22 @@ footer section div a:hover, footer section div p:hover{
   justify-content: space-between;
   display: flex;
 }
+
+.error {
+  background-color: #d35353;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 30%;
+}
+
 .fs-header h2{
   margin: 0;
 }
@@ -720,23 +736,23 @@ footer section div a:hover, footer section div p:hover{
 
 .fs-user-card {
   background-color: var(--BG3);
-  border-radius: 74px;
+  border-radius: 5px;
   display: flex;
-  gap: 5px;
+  gap: 20px;
   width: auto;
   flex-shrink: 0;
-  padding: 20px;
+  padding: 0 10px;
   align-items: center;
   position: relative;
 }
 
 .fs-user-card figure, .fs-pet-card figure {
   width: 80px;
+  margin: 0;
   flex-shrink: 0;
   height: 80px;
   background-color: #fff;
   box-shadow: 2px 2px 8px #00000077;
-  border-radius: 50%;
 }
 
 .fs-sobre-ti {
@@ -802,10 +818,31 @@ footer section div a:hover, footer section div p:hover{
   display: flex;
   height: auto;
   background-color: var(--BG3);
-  border-radius: 74px;
-  padding: 10px 30px 10px 10px;
+  border-radius: 5px;
+  align-items: center;
+  padding: 10px 10px;
   gap: 10px;
 }
+
+.fs-gender-mark {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fs-pet-card p {
+    margin: 0;
+}
+
+.fs-pet-card h3 {
+    margin: 0;
+}
+
 .fs-pet-card-nacimiento{
   width: 35%;
 }

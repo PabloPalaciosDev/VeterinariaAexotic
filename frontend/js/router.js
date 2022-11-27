@@ -61,6 +61,12 @@ const rutasPlantillas = {
             await imprimirPlantillaGeneralFunction('/frontend/html/registro.html', this.title, 5);
         }
     },
+    '/busqueda': {
+        title: 'Busqueda',
+        imprimirPlantilla: async function () {
+            await imprimirPlantillaGeneralFunction('/frontend/html/busqueda.html', this.title);
+        }
+    },
     error: {
         title: 'Error',
         imprimirPlantilla: async function () {

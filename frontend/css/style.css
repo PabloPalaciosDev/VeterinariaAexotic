@@ -183,17 +183,20 @@ footer section div{
   padding: 10px;
   text-align: center;
 }
-footer section div a{
-  padding: 10px;
+
+footer section div a, footer section div p{ 
+  cursor: pointer;
   text-decoration: none;
   color: var(--BG3);
 }
-footer section div a:hover{
+
+footer section div a {
+  padding: 10px;
+}
+
+footer section div a:hover, footer section div p:hover{
   color: var(--accent);
   font-weight: 700;
-}
-footer section div p{
-  padding: 10px;
 }
 
 .title-footer{

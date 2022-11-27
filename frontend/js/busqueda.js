@@ -1,20 +1,29 @@
-let busqueda = [];
+let baseUrl = "http://localhost:8080";
 
-function ObtenerBusqueda(){
-    fetch("http://localhost:8080/repositorio/all").
+function ObtenerBusqueda(busqueda){
+    fetch(baseUrl +"/repositorio/"+ busqueda).
     then(resultado =>{
         resultado.json().then(json =>{
-            busqueda = json;
-            console.log(busqueda);
-            ImprimirBusqueda();
+            //busqueda = json;
+            //console.log(busqueda);
+            ImprimirBusqueda(json);
         })
     })
 }
 
-function ImprimirBusqueda(){
+const formulario_busqueda = document.getElementById("formulario-busqueda")
+
+formulario_busqueda.addEventListener("submit" , function (evento){
+    evento.preventDefault();
+    const busqueda = document.getElementById("tamano_promedio");
+    document.getElementById("busqueda-contenedor").innerHTML=""
+    ObtenerBusqueda(busqueda.value)
+})
+
+function ImprimirBusqueda(peticion){
     let contenedor = document.getElementById("busqueda-contenedor");
-    busqueda.forEach(busqueda =>{
-        contenedor.innerHTML += MapearBusqueda(busqueda);
+    peticion.forEach(iterador =>{
+        contenedor.innerHTML += MapearBusqueda(iterador);
     });
 }
 
@@ -30,5 +39,3 @@ function MapearBusqueda(busqueda){
 </section>`;
 
 }
-
-

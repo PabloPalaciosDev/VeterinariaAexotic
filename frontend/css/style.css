@@ -47,31 +47,38 @@ header a{
 .header ul li{
   margin: 0 auto;
 }
-.header ul li a  {
+
+.header ul li{
   text-align:center;
   display: block;
+  cursor: pointer;
   text-decoration: none;
   font-family: var(--subtitulos);
   color: var(--text);
   font-weight: 700;
   padding: 5px;
 }
-.container-register .btn-registrarse{
+
+header ul .current-link {
+  text-decoration: underline;
+}
+
+.btn-registrarse{
   margin: 0 auto;
   text-align: center;
   background-color: var(--primary1);
   border-radius: 20px;
   color: white;
   font-weight: 700;
-  width: 40%;
+  width: 20%;
   padding: 10px;
 }
-.container-register .btn-registrarse:hover{
+.btn-registrarse:hover{
   background-color: var(--text);
   color: var(--BG1);
 }
 
-.header ul li a:hover{
+.header ul li:hover{
   color: var(--primary1);
 }
 

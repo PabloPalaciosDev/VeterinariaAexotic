@@ -46,7 +46,6 @@ public class MascotasDB {
             return mascotas;
         } catch (SQLException e) {
             System.out.println("ocurrio una excepcion en mascotasDB");
-            int x = 1;
         }
         return null;
     }
@@ -63,7 +62,7 @@ public class MascotasDB {
             resultado = stm.executeUpdate(query);
             return resultado;
         } catch (SQLException e) {
-            int x =1;
+            e.printStackTrace();
         }
         return resultado;
     }
@@ -84,7 +83,7 @@ public class MascotasDB {
             resultado = stm.executeUpdate(query);
             return resultado;
         } catch (SQLException e) {
-            int x =1;
+            e.printStackTrace();
         }
         return resultado;
     }
@@ -97,7 +96,7 @@ public class MascotasDB {
 
             return stmt.executeUpdate(query);
         } catch (SQLException e) {
-            int x = 1;
+            e.printStackTrace();
         }
         return resultado;
     }

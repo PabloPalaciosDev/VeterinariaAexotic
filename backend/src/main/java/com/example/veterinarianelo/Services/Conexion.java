@@ -11,15 +11,17 @@ public class Conexion {
             String connectionUrl = "jdbc:sqlserver://localhost:1433;"
             + "databaseName=VeterinariaNelo;"
             + "user=sa;"
-            + "password=12345678;"
+            + "password=KKdeperro123;"
             + "trustServerCertificate=true";
             Connection con = DriverManager.getConnection(connectionUrl);
             return con;
-        } catch (SQLException E) {
-            System.out.println("ERROR DE CONEXION xd");
+        } catch (SQLException e) {
+            System.out.println("==== ERROR DE CONEXION ====");
+            e.printStackTrace();
         }
         catch(ClassNotFoundException cnfex){
-            System.out.println("error en clase conexion");
+            System.out.println("==== ERROR EN LA CLASE DE CONEXION ====");
+            cnfex.printStackTrace();
         }
         return null;
     }

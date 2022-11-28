@@ -4,20 +4,6 @@
  */
 
 
-const crearCardUser = () => {
-    user = JSON.parse(localStorage.getItem('user'));
-    document.getElementById('link-login').remove();
-    document.getElementById('link-register').remove();
-    
-    const cardU = document.createElement('div');
-    cardU.classList.add('pointer', 'fs-user-card', 'fs-header-child');
-    cardU.innerHTML = `<figure><img class="fs-img" src="/frontend/img/user.png" alt="user"></figure><div><h2>${user.nombre+' '+user.apellido}</h2><p>@${user.cedula}</p></div>`;
-    cardU.addEventListener('click', e=> {
-        cargarRutaRequest('/user-panel');
-    });
-    document.getElementById('header-menu').appendChild(cardU);
-}
-
 //Función para parametrizar la carga de las plantillas HTML
 const imprimirPlantillaGeneralFunction = async (path, title, currentLink = undefined) => {
     let plantilla = await fetch('/frontend/html/header.html').then(data => data.text());
@@ -25,9 +11,16 @@ const imprimirPlantillaGeneralFunction = async (path, title, currentLink = undef
     plantilla += await fetch('/frontend/html/footer.html').then(data => data.text());
     document.getElementById('root').innerHTML = plantilla;
     window.document.title = title;
+
+    //Agregar el subrayado al link al que se accedio
     document.getElementById('header-menu').children[currentLink]?.classList.add('current-link');
-    if(localStorage.getItem('user')) 
-        crearCardUser();
+
+    //Validar si agregar (o no) la tarjeta del usuario con la session actual y eliminar login/register
+    if(await isUserSessionActive()) {
+        document.getElementById('link-login').remove();
+        document.getElementById('link-register').remove();    
+        crearCardUser('header-menu');
+    }
 }
 
 const imprimirPlantillaSessionFunction = async (path, title) => {
@@ -74,7 +67,10 @@ const rutasPlantillas = {
             await imprimirPlantillaGeneralFunction('/frontend/html/login.html', this.title, 4);
         },
         loadLogic: loadLogin,
-        preCondition: () => localStorage.getItem('user') === null
+        preCondition: async () => {
+            const r = await isUserSessionActive()
+            return !r
+        } 
     },
     '/register': {
         title: 'Register',
@@ -82,7 +78,10 @@ const rutasPlantillas = {
             await imprimirPlantillaGeneralFunction('/frontend/html/registro.html', this.title, 5);
         },
         loadLogic: loadRegister,
-        preCondition: () => localStorage.getItem('user') === null
+        preCondition: async () => {
+            const r = await isUserSessionActive()
+            return !r
+        } 
     },
     '/busqueda': {
         title: 'Busqueda',
@@ -106,7 +105,7 @@ const rutasPlantillas = {
             await imprimirPlantillaSessionFunction('/frontend/html/user-profile.html', this.title);
         },
         loadLogic: loadUserPanel,
-        preCondition: () => localStorage.getItem('user') !== null
+        preCondition: async () => await isUserSessionActive()
     },
     error: {
         title: 'Error',
@@ -122,7 +121,7 @@ const rutasPlantillas = {
 const cargarRutaRequest = async (ruta) => {
     const rutaPlantilla = rutasPlantillas[ruta] || rutasPlantillas.error;
     window.history.pushState({}, 'done', ruta);
-    if(rutaPlantilla.preCondition()) {
+    if(await rutaPlantilla.preCondition()) {
         await rutaPlantilla.imprimirPlantilla();
         rutaPlantilla.loadLogic();
         return;

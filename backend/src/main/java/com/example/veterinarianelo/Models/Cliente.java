@@ -7,6 +7,20 @@ public class Cliente {
     private String direccion;
     private String email;
     private String pass;
+    private String foto;
+    private String about;
+    public String getFoto() {
+        return foto;
+    }
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+    public String getAbout() {
+        return about;
+    }
+    public void setAbout(String about) {
+        this.about = about;
+    }
     public String getCedula() {
         return cedula;
     }

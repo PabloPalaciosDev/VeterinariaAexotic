@@ -2,82 +2,18 @@
     <a href="/" class="logo-nav">Aexotic Veterinary</a>
 </header>
 <main class="fs-principal">
-    <div class="fs-header">
-        <div class="fs-user-card fs-header-child">
-            <figure>
-                <img class="fs-img" src="/frontend/img/user.png" alt="user">
-            </figure>
-            <div>
-                <h2>Nombre de usuario</h2>
-                <p>@username</p>
-            </div>
-            <a class="fs-float-button" href="#">
-                <img class="fs-img fs-img-70p" src="/frontend/img/edit.png" alt="edit-button">
-            </a>
-        </div>
 
-        <div class="fs-header-child fs-sobre-ti">
-            <h2>Sobre ti</h2>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci, molestiae rem! Deleniti voluptatibus commodi qui cumque neque architecto, ullam ipsam?</p>
-        </div>            
+    <div class="fs-header" id="panel-header"> </div>
+
+    <div class="fs-botones-panel">
+        <div class="pointer" id="cerrarSession">Cerrar sesión</div>
+        <div class="pointer">Añadir nueva mascota</div>
     </div>
 
     <div class="fs-separador"></div>
 
     <h2 style="text-align: center; margin-bottom: 20px;">Tus mascotas</h2>
 
-    <section class="fs-pets-container">
-
-        <article class="fs-pet-card">
-            <figure>
-                <img src="/frontend/img/dog-png.webp" alt="pet" class="fs-img">
-            </figure>
-            <div class="fs-pet-card-datos">
-                <h3>Luna</h3>
-                <p>Peso: 40kg</p>
-                <p>Tamaño: grande</p>
-            </div>
-            <div class="fs-pet-card-nacimiento">
-                <p>Fecha de nacimiento:</p>
-                <p>12-12-2005</p>
-            </div>
-            <div class="fs-pet-card-nacimiento">
-                <p>Genero:</p>
-                <div class="fs-gender-mark" href="#">
-                    <img class="fs-img fs-img-70p" src="/frontend/img/fem.png" alt="gender">
-                </div>
-            </div>
-            <a class="fs-float-button" href="#">
-                <img class="fs-img fs-img-70p" src="/frontend/img/edit.png" alt="edit-button">
-            </a>
-        </article>
-
-
-
-        <article class="fs-pet-card">
-            <figure>
-                <img src="/frontend/img/dog-png.webp" alt="pet" class="fs-img">
-            </figure>
-            <div class="fs-pet-card-datos">
-                <h3>Luna</h3>
-                <p>Peso: 40kg</p>
-                <p>Tamaño: grande</p>
-            </div>
-            <div class="fs-pet-card-nacimiento">
-                <p>Fecha de nacimiento:</p>
-                <p>12-12-2005</p>
-            </div>
-            <div class="fs-pet-card-nacimiento">
-                <p>Genero:</p>
-                <div class="fs-gender-mark" href="#">
-                    <img class="fs-img fs-img-70p" src="/frontend/img/man.png" alt="gender">
-                </div>
-            </div>
-            <a class="fs-float-button" href="#">
-                <img class="fs-img fs-img-70p" src="/frontend/img/edit.png" alt="edit-button">
-            </a>
-        </article>
-
-    </section>
+    <section class="fs-pets-container" id="cards-mascotas"> </section>
 </main>
     

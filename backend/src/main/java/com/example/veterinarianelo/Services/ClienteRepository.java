@@ -48,7 +48,7 @@ public class ClienteRepository {
     }
 
     public void registerCliente (Cliente cliente) {
-        String sql = "INSERT INTO Cliente VALUES (?, ?, ?, ?, ?, ?)";        
+        String sql = "INSERT INTO Cliente VALUES (?, ?, ?, ?, ?, ?, ?, ?)";        
         try (
             PreparedStatement pStatement = new Conexion().openDB().prepareStatement(sql);
         ) {
@@ -58,6 +58,8 @@ public class ClienteRepository {
             pStatement.setString(4, cliente.getDireccion());
             pStatement.setString(5, cliente.getEmail());
             pStatement.setString(6, cliente.getPass());
+            pStatement.setString(7, cliente.getFoto());
+            pStatement.setString(8, cliente.getAbout());
             pStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,7 +72,8 @@ public class ClienteRepository {
         cliente.setApellido(resultSet.getString(3));
         cliente.setDireccion(resultSet.getString(4));
         cliente.setEmail(resultSet.getString(5));
-        if(pass)
-            cliente.setPass(resultSet.getString(6));
+        if(pass) cliente.setPass(resultSet.getString(6));
+        cliente.setFoto(resultSet.getString(7));
+        cliente.setAbout(resultSet.getString(8));
     }
 }

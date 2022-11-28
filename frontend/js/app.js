@@ -1,45 +1,5 @@
-//VARIABLES Y FUNCIONES GLOBALES
-const host = "http://localhost:8080";
-
-const error = document.createElement('div');
-error.classList.add('error')
-
-const succes = document.createElement('div');
-succes.classList.add('succes')
-
-const addTemporalError = (element, text) => {
-    error.textContent = text;
-    element.appendChild(error);
-    setTimeout(()=>{
-        error.remove();
-    }, 2000)
-}
-
-const addTemporalSucces = (element, text) => {
-    succes.textContent = text;
-    element.appendChild(succes);
-    setTimeout(()=>{
-        succes.remove();
-    }, 2000)
-} 
-
-const validarCamposFormularios = (campos, submit) => {
-    submit.disabled = true;
-    campos.forEach(campo => {
-        campo.addEventListener('input', e => {
-            if(campos.every(campo => campo.value !== '')) {
-                submit.disabled = false;
-                submit.classList.remove('disabled');
-                return;
-            } 
-            submit.disabled = true;
-            submit.classList.add('disabled');
-        });
-    })
-}
-
 //FUNCIONES PARA CARGAR LA LOGICA DE CADA VISTA
-const loadHome = () => {
+const loadHome = async () => {
     console.log('Home funcionando');
 }
 
@@ -125,16 +85,16 @@ const loadLogin = () => {
 }
 
 
-const loadRegister = () => {
+const loadRegister = async () => {
 
     const form = document.getElementById('form-registro');
 
     const campos = [
-        document.getElementById('cedula'),
-        document.getElementById('nombre'),
-        document.getElementById('apellido'),
-        document.getElementById('correo-usuario'),
-        document.getElementById('pass')
+        document.getElementById('cedula'), // [0]
+        document.getElementById('nombre'), // [1]
+        document.getElementById('apellido'), // [2]
+        document.getElementById('correo-usuario'), // [3]
+        document.getElementById('pass') // [4]
     ];
     const subm = document.getElementById('submit');
 
@@ -146,14 +106,16 @@ const loadRegister = () => {
             cedula: campos[0].value,
             nombre: campos[1].value,
             apellido: campos[2].value,
-            direccion: 'lelelel',
+            direccion: null,
             email: campos[3].value,
-            pass: campos[4].value
+            pass: campos[4].value,
+            foto: null,
+            about: null
         }
-        const userExist = await fetch(`${host}/clientes/${campos[3].value}/${campos[0].value}`)
-            .then(d => d.json()).then(d => d);
 
-        if(userExist.length === 0) {
+        const hayUsuarios = await getUsersByIds(newUser.email, newUser.cedula);
+
+        if(hayUsuarios.length === 0) {
             await fetch(`${host}/cliente/register`, {
                 headers: {
                     'Accept': 'application/json',
@@ -175,6 +137,22 @@ const loadError = () => {
     console.log('Error funcionando');
 }
 
-const loadUserPanel = () => {
-    
-}
+const loadUserPanel = async () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    crearCardUser('panel-header');
+    document.getElementById('panel-header').innerHTML += `
+    <div class="fs-header-child fs-sobre-ti">
+        <h2>Sobre ti</h2>
+        <p>${user.about || 'Aún no haz colocado nada aquí'}</p>
+    </div>
+    `;
+    const mascotas = await fetch(`${host}/mascotas/cliente/${user.cedula}`).then(d => d.json()).then(d => d);
+
+    crearCardsMascotas(mascotas, 'cards-mascotas');
+
+
+    document.getElementById('cerrarSession').addEventListener('click', e => {
+        localStorage.removeItem('user')
+        window.location.href = '/';
+    })
+}   

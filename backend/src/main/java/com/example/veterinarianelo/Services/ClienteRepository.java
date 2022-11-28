@@ -1,5 +1,6 @@
 package com.example.veterinarianelo.Services;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,6 +21,23 @@ public class ClienteRepository {
             System.out.println("¡==== NO SE REALIZO LA CONSULTA CORRECTAMENTE, VERIFICA ====!");
         }
         return cliente;
+    }
+
+    public void registerCliente (Cliente cliente) {
+        String sql = "INSERT INTO Cliente VALUES (?, ?, ?, ?, ?, ?)";        
+        try (
+            PreparedStatement pStatement = new Conexion().openDB().prepareStatement(sql);
+        ) {
+            pStatement.setString(1, cliente.getCedula());
+            pStatement.setString(2, cliente.getNombre());
+            pStatement.setString(3, cliente.getApellido());
+            pStatement.setString(4, cliente.getDireccion());
+            pStatement.setString(5, cliente.getEmail());
+            pStatement.setString(6, cliente.getPass());
+            pStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     private void createCliente(Cliente cliente, ResultSet resultSet) throws SQLException {

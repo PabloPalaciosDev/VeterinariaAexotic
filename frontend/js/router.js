@@ -8,6 +8,7 @@ const crearCardUser = () => {
     user = JSON.parse(localStorage.getItem('user'));
     document.getElementById('link-login').remove();
     document.getElementById('link-register').remove();
+    
     const cardU = document.createElement('div');
     cardU.classList.add('pointer', 'fs-user-card', 'fs-header-child');
     cardU.innerHTML = `<figure><img class="fs-img" src="/frontend/img/user.png" alt="user"></figure><div><h2>${user.nombre+' '+user.apellido}</h2><p>@${user.cedula}</p></div>`;

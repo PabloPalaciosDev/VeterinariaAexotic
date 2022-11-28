@@ -1,5 +1,23 @@
+//VARIABLES Y FUNCIONES GLOBALES
 const host = "http://localhost:8080";
-//http://localhost:8080/cliente/session/janetleverling@utp.ac.pa/12345
+
+
+const validarCamposFormularios = (campos, submit) => {
+    submit.disabled = true;
+    campos.forEach(campo => {
+        campo.addEventListener('input', e => {
+            if(campos.every(campo => campo.value !== '')) {
+                submit.disabled = false;
+                submit.classList.remove('disabled');
+                return;
+            } 
+            submit.disabled = true;
+            submit.classList.add('disabled');
+        });
+    })
+}
+
+//FUNCIONES PARA CARGAR LA LOGICA DE CADA VISTA
 const loadHome = () => {
     console.log('Home funcionando');
 }
@@ -62,17 +80,20 @@ const loadBusqueda = () => {
 const loadLogin = () => {
     
     const form = document.getElementById('login-form');
-    const email = document.getElementById('login-form-email'); 
-    const pass = document.getElementById('login-form-pass');
+    const campos = [
+        document.getElementById('login-form-email'), 
+        document.getElementById('login-form-pass')
+    ];
     const submit = document.getElementById('login-form-submit');
     const error = document.createElement('div');
     error.textContent = 'Credenciales incorrectas, intente nuevamente';
     error.classList.add('error')
-    submit.disabled = true;
+
+    validarCamposFormularios(campos, submit);
 
     form.addEventListener('submit', async e => {
         e.preventDefault();
-        const user = await fetch(`${host}/cliente/session/${email.value}/${pass.value}`)
+        const user = await fetch(`${host}/cliente/session/${campos[0].value}/${campos[1].value}`)
             .then(data => data.json()).then(data => data);
         if(user.cedula) {
             window.localStorage.setItem('user', JSON.stringify(user));
@@ -86,30 +107,28 @@ const loadLogin = () => {
         }
     })
 
-    const validarSubmit = () => {
-        const value1 = pass.value;
-        const value2 = email.value;
-        if(value1 !== '' && value2 !== '') {
-            submit.disabled = false;
-            submit.classList.remove('disabled');
-        } else {
-            submit.disabled = true;
-            submit.classList.add('disabled');
-        }
-    }
-
-    pass.addEventListener('input', e => {
-        validarSubmit();
-    })
-
-    email.addEventListener('input', e => {
-        validarSubmit();
-    })
 }
 
 
 const loadRegister = () => {
-    console.log('Register funcionando');
+
+    const form = document.getElementById('register-form');
+
+    const campos = [
+        document.getElementById('nombre'),
+        document.getElementById('apellido'),
+        document.getElementById('correo-usuario'),
+        document.getElementById('pass'),
+        document.getElementById('cedula')
+    ];
+    const subm = document.getElementById('submit');
+
+    validarCamposFormularios(campos, subm)
+
+    form?.addEventListener('submit', async e => {
+        e.preventDefault();
+    })
+
 }
 
 

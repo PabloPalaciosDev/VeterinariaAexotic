@@ -2,7 +2,7 @@
 
     <h2>Crear cuenta</h2>          
 
-    <form action="" method="POST" class="register-form">
+    <form method="POST" class="register-form">
 
         <section class="from-section input-doble">
             <div>
@@ -17,7 +17,7 @@
 
         <section class="from-section input-doble">
             <div>
-                <label class="resgistro-label" for="correo-usuario">Correo / Usuario</label>
+                <label class="resgistro-label" for="correo-usuario">Correo</label>
                 <input class="resgistro-campo" type="email" id="correo-usuario" name="user">
             </div>
             <div>
@@ -27,12 +27,12 @@
         </section>
 
         <section class="from-section">
-            <label class="resgistro-label" for="numero">Número telefonico</label>
-            <input class="resgistro-campo" type="tel" name="numero" id="numero">
+            <label class="resgistro-label" for="numero">Cédula</label>
+            <input class="resgistro-campo" type="text" name="cedula" id="cedula">
         </section>
 
         <section class="from-section">
-            <input type="submit" class="resgistro-campo resgistro-campo-submit" value="REGISTRAR">
+            <input type="submit" class="resgistro-campo resgistro-campo-submit disabled" value="REGISTRAR" id="submit">
         </section>
     </form>
 </main>

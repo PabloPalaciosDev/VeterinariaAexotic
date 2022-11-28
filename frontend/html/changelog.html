@@ -41,13 +41,30 @@
     <section class="changelog-errores changelog-caja-toda">
         <section class="changelog-errores-caja changelog-caja-blanca">
             <section class="changelog-caja-texto changelog-errores-texto">
-                <h4 class="changelog-enviar-comentario">Enviar comentarios a Aexotic</h4>
+                <h4 class="changelog-enviar-comentario">CRUD Reportes Aexotic</h4>
             </section>
             <section>
-                <form action="" method="">
-                    <p class="changelog-enviar-comentario">Describa el problema detalladamente</p>
-                    <textarea class="changelog-texto" name="" id="" cols="30" rows="10"></textarea>
-                    <input class="changelog-enviar-boton" type="submit" value="Enviar">
+                <form class="changelog-form" action="" method="">
+                    <input type="hidden" name="reporte_id" id="reporte_id">
+                    <input id="fecha" type="date">
+                    <input id="titulo" list="titulos">
+                      <datalist id="titulos">
+                        <option value="ARREGLADO"></option>
+                        <option value="CAMBIO"></option>
+                        <option value="ELIMINADA"></option>
+                        <option value="AÑADIDO"></option>
+                      </datalist>
+                    <input id="cambio" list="cambios">
+                      <datalist id="cambios">
+                        <option value="arreglar"></option>
+                        <option value="cambiar"></option>
+                        <option value="eliminar"></option>
+                        <option value="agregar"></option>
+                      </datalist>
+                    <label for="contenido">Contenido del Reporte</label>
+                    <textarea class="changelog-texto" name="" id="contenido" cols="30" rows="10"></textarea>
+                    <button class="changelog-enviar-boton" onclick="GuardarReporte()">Enviar</button>
+                    <button class="changelog-enviar-boton" onclick="ActualizarReporte()">Actualizar</button>
                 </form>
             </section>
         </section>

@@ -27,6 +27,7 @@ public class ReportesDB {
 
             while(result.next()){
                 Reportes reporte = new Reportes(
+                    result.getInt("reporte_id"),
                     result.getString("fecha_reporte"),
                     result.getString("titulo"),
                     result.getString("tipo_cambio"),
@@ -40,8 +41,58 @@ public class ReportesDB {
             return reportes;
         } catch(SQLException e){
             System.out.println("ocurrio una excepcion en reportesDB");
-            int x = 1;
         }
     return null;
+    }
+
+    public int GuardarReportes(Reportes reporte){
+        int resultado = 0;
+        try {
+            Statement stnt = _cn.createStatement();
+            String query = "exec InsertarReportes '"+
+            reporte.getFecha()+"', '"+
+            reporte.getTitulo()+"', '"+
+            reporte.getCambio()+"', '"+
+            reporte.getContenido()+"'";
+
+            resultado = stnt.executeUpdate(query);
+
+            return resultado;
+        } catch (SQLException e) {
+            System.out.println("ocurrio una excepcion en reportesDB");
+        }
+        return resultado;
+    }
+
+    public int ActualizarReportes(Reportes reporte){
+        int resultado = 0;
+        try {
+            Statement stnt = _cn.createStatement();
+            String query = "update reportes set fecha_reporte = '"+
+            reporte.getFecha()+"', titulo = '"+
+            reporte.getTitulo()+"', tipo_cambio = '"+
+            reporte.getCambio()+"', contenidor_reporte = '"+
+            reporte.getContenido()+"' where reporte_id = "+reporte.getReporte_id();
+
+            resultado = stnt.executeUpdate(query);
+
+            return resultado;
+        } catch (SQLException e) {
+            System.out.println("ocurrio una excepcion en reportesDB");
+        }
+        return resultado;
+    }
+
+    public int EliminarReporte(int rid){
+        int resultado = 0;
+        try {
+            Statement stnt = _cn.createStatement();
+            String query = "Delete reportes where reporte_id = "+rid;
+
+            return stnt.executeUpdate(query);
+        } catch (SQLException e) {
+            System.out.println("ocurrio una excepcion en reportesDB");
+        }
+        return resultado;
     }
 }

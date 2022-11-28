@@ -873,6 +873,39 @@ footer section div p{
 .changelog-agregar{
   background-color: #32d296;
 }
+.changelog-btn-eliminar{
+  background-color:#ff4f4f;
+	border-radius:10px;
+	border:2px solid #cc4e4e;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:5px 5px;
+	text-decoration:none;
+}
+.changelog-btn-actualizar{
+  background-color:#fffd75;
+	border-radius:10px;
+	border:2px solid #fbff00;
+	cursor:pointer;
+	color: black;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:5px 5px;
+	text-decoration:none;
+}
+.changelog-form{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.changelog-form input, textarea{
+  font-family: Plus Jakarta Sans;
+  margin-bottom: 10px;
+}
 .changelog-mensaje{
   font-family: Plus Jakarta Sans;
   margin-left: 150px;
@@ -911,7 +944,7 @@ footer section div p{
   background: #AECEF4;
   border-radius: 15px;
   text-align: center;
-  width: 100px;
+  width: 250px;
 }
 /*MEDIA CHANGELOG*/
 @media (max-width: 1230px) {

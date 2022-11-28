@@ -709,6 +709,13 @@ footer section div a:hover, footer section div p:hover{
   display: flex;
 }
 
+.succes {
+  background-color: #536ad3;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+}
+
 .error {
   background-color: #d35353;
   color: #fff;

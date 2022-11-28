@@ -1,6 +1,27 @@
 //VARIABLES Y FUNCIONES GLOBALES
 const host = "http://localhost:8080";
 
+const error = document.createElement('div');
+error.classList.add('error')
+
+const succes = document.createElement('div');
+succes.classList.add('succes')
+
+const addTemporalError = (element, text) => {
+    error.textContent = text;
+    element.appendChild(error);
+    setTimeout(()=>{
+        error.remove();
+    }, 2000)
+}
+
+const addTemporalSucces = (element, text) => {
+    succes.textContent = text;
+    element.appendChild(succes);
+    setTimeout(()=>{
+        succes.remove();
+    }, 2000)
+} 
 
 const validarCamposFormularios = (campos, submit) => {
     submit.disabled = true;
@@ -85,9 +106,6 @@ const loadLogin = () => {
         document.getElementById('login-form-pass')
     ];
     const submit = document.getElementById('login-form-submit');
-    const error = document.createElement('div');
-    error.textContent = 'Credenciales incorrectas, intente nuevamente';
-    error.classList.add('error')
 
     validarCamposFormularios(campos, submit);
 
@@ -100,10 +118,7 @@ const loadLogin = () => {
             window.location.href = '/';
         }
         else {
-            form.appendChild(error);
-            setTimeout(()=>{
-                error.remove();
-            }, 2000)
+            addTemporalError(form, 'Credenciales incorrectas, intente nuevamente');
         }
     })
 
@@ -112,14 +127,14 @@ const loadLogin = () => {
 
 const loadRegister = () => {
 
-    const form = document.getElementById('register-form');
+    const form = document.getElementById('form-registro');
 
     const campos = [
+        document.getElementById('cedula'),
         document.getElementById('nombre'),
         document.getElementById('apellido'),
         document.getElementById('correo-usuario'),
-        document.getElementById('pass'),
-        document.getElementById('cedula')
+        document.getElementById('pass')
     ];
     const subm = document.getElementById('submit');
 
@@ -127,6 +142,30 @@ const loadRegister = () => {
 
     form?.addEventListener('submit', async e => {
         e.preventDefault();
+        const newUser = {
+            cedula: campos[0].value,
+            nombre: campos[1].value,
+            apellido: campos[2].value,
+            direccion: 'lelelel',
+            email: campos[3].value,
+            pass: campos[4].value
+        }
+        const userExist = await fetch(`${host}/clientes/${campos[3].value}/${campos[0].value}`)
+            .then(d => d.json()).then(d => d);
+
+        if(userExist.length === 0) {
+            await fetch(`${host}/cliente/register`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'post',
+                body: JSON.stringify(newUser)
+            }).then(d => d.text()).then(d => console.log(d));
+            addTemporalSucces(form, '¡Usuario registrado correctamente!')
+        } else  {
+            addTemporalError(form, 'Esa cedula o correo ya estan registradas');
+        }
     })
 
 }

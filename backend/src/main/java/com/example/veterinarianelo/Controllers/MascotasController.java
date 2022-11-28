@@ -23,7 +23,6 @@ public class MascotasController {
 
     @PostMapping("/mascotas")
     public int InsertarMascota(@RequestBody Mascotas mascota){
-        int x = 1;
         return new MascotasDB().InsertarMascotas(mascota);
     }
 

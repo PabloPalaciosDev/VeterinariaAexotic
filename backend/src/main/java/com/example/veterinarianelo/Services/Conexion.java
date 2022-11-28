@@ -17,11 +17,11 @@ public class Conexion {
             return con;
         } catch (SQLException E) {
             System.out.println("ERROR DE CONEXION xd");
-            int x = 1;
+            
         }
         catch(ClassNotFoundException cnfex){
             System.out.println("error en clase conexion");
-            int x = 1;
+            
         }
         return null;
     }

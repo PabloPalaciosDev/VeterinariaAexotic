@@ -41,7 +41,6 @@ public class RepositorioBusquedaDB {
 
         } catch (SQLException e) {
             System.out.println("ocurrio una excepcion en RepositorioBusquedaDB");
-            int x = 1;
         }
         return null;
     }

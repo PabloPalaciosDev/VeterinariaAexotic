@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Si nesecitan agregar algún CDN, haganlo aquí, no en las plantillas HTML -->
+    <link rel="stylesheet" href="/frontend/css/normalize.css">
+    <link rel="stylesheet" href="/frontend/css/style.css">
+
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- En esta etiqueda se cargaran todas las plantillas HTML -->
+    <div id="root"></div>
+
+    <!-- AQUÍ SE COLOCAN LOS OTROS ARCHIVOS JS, JUSTO ANTES DEL ROUTER -->
+    <script src="/frontend/js/global.js"></script> <!-- FUNCIONES Y VARIABLES GLOBALES -->
+    <script src="/frontend/js/app.js"></script> <!-- FUNCIONES DE LOGICA PARA CADA VISTA -->
+
+    <!-- Router -->
+    <script src="/frontend/js/router.js"></script>
+
+</body>
+</html>

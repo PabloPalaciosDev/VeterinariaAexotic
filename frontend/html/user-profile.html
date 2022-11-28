@@ -1,121 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/frontend/css/normalize.css">
-    <link rel="stylesheet" href="/frontend/css/style.css">
-    <title>Perfil de usuario</title>
-</head>
-<body class="fs-back">
-    <!--NAVEGACION-->
-    <header class="header">	
-        <a href="index.html" class="logo-nav">Aexotic Veterinary</a>
-    </header>
-    <main class="fs-principal">
-        <div class="fs-header">
-            <div class="fs-user-card fs-header-child">
-                <figure>
-                    <img class="fs-img" src="/frontend/img/user.png" alt="user">
-                </figure>
-                <div>
-                    <h2>Nombre de usuario</h2>
-                    <p>@username</p>
-                </div>
-                <a class="fs-float-button" href="#">
-                    <img class="fs-img fs-img-70p" src="/frontend/img/edit.png" alt="edit-button">
-                </a>
-            </div>
+<header class="header">	
+    <a href="/" class="logo-nav">Aexotic Veterinary</a>
+</header>
+<main class="fs-principal">
 
-            <div class="fs-header-child fs-sobre-ti">
-                <h2>Sobre ti</h2>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci, molestiae rem! Deleniti voluptatibus commodi qui cumque neque architecto, ullam ipsam?</p>
-            </div>            
-        </div>
+    <div class="fs-header" id="panel-header"> </div>
 
-        <div class="fs-separador"></div>
+    <div class="fs-botones-panel">
+        <div class="pointer" id="cerrarSession">Cerrar sesión</div>
+        <div class="pointer">Añadir nueva mascota</div>
+    </div>
 
-        <h2 style="text-align: center; margin-bottom: 20px;">Tus mascotas</h2>
+    <div class="fs-separador"></div>
 
-        <section class="fs-pets-container">
+    <h2 style="text-align: center; margin-bottom: 20px;">Tus mascotas</h2>
 
-            <article class="fs-pet-card">
-                <figure>
-                    <img src="/frontend/img/dog-png.webp" alt="pet" class="fs-img">
-                </figure>
-                <div class="fs-pet-card-datos">
-                    <h3>Luna</h3>
-                    <p>Peso: 40kg</p>
-                    <p>Tamaño: grande</p>
-                </div>
-                <div class="fs-pet-card-nacimiento">
-                    <p>Fecha de nacimiento:</p>
-                    <p>12-12-2005</p>
-                </div>
-                <a class="fs-float-button fs-float-button-big" href="#">
-                    <img class="fs-img fs-img-70p" src="/frontend/img/fem.png" alt="gender">
-                </a>
-                <a class="fs-float-button fs-float-button-center" href="#">
-                    <img class="fs-img fs-img-70p" src="/frontend/img/edit.png" alt="edit-button">
-                </a>
-            </article>
-
-
-
-            <article class="fs-pet-card">
-                <figure>
-                    <img src="/frontend/img/dog-png.webp" alt="pet" class="fs-img">
-                </figure>
-                <div class="fs-pet-card-datos">
-                    <h3>Luna</h3>
-                    <p>Peso: 40kg</p>
-                    <p>Tamaño: grande</p>
-                </div>
-                <div class="fs-pet-card-nacimiento">
-                    <p>Fecha de nacimiento:</p>
-                    <p>12-12-2005</p>
-                </div>
-                <a class="fs-float-button fs-float-button-big" href="#">
-                    <img class="fs-img fs-img-70p" src="/frontend/img/man.png" alt="gender">
-                </a>
-                <a class="fs-float-button fs-float-button-center" href="#">
-                    <img class="fs-img fs-img-70p" src="/frontend/img/edit.png" alt="edit-button">
-                </a>
-            </article>
-
-        </section>
-    </main>
-    <footer>
-        <section>
-            <div>
-                <a class="title-footer" href="index.html">Aexotic Veterinary</a>
-            </div>
-            <div>
-                <h4>Terminos y Condiciones</h4>
-                <a href="#">Terminos de Uso</a>
-                <a href="#">Politica de privacidad</a>
-            </div>
-            <div>
-                <h4>Proyecto</h4>
-                <a href="index.html">Inicio</a>
-                <a href="about_us.html">Sobre Nosotros</a>
-                <a href="descripcion.html">Descripción</a>
-                <a href="busqueda.html">Encuentra un animal exotico</a>
-                <a href="Contactos.html">Contactanos</a>
-            </div>
-            <div>
-                <h4>Contacto</h4>
-                <a href="https://github.com/PabloPalaciosDev/vet-project.git">Github<img width="20" height="20" src="/frontend/img/github-svgrepo-com.svg" alt="enlace-github"></a>
-                <a href="mailto:ppalacios500@gmail.com?Subject=Estoy%20interesado%20en%20su%20proyecto">Contactar por correo</a>
-                <a href="tel:+50761541114">+507 6154114</a>
-            </div>
-            <div>
-                <h4>Ubicanos</h4>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d985.1148732030823!2d-79.53196772522651!3d9.021780055423635!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4c5392d25e775b5f!2sFacultad%20De%20Ing.%20De%20Sistemas%20Comp.!5e0!3m2!1ses!2spa!4v1667066446489!5m2!1ses!2spa"
-                 width="150" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>            
-        </section>
-    </footer>    
-</body>
-</html>
+    <section class="fs-pets-container" id="cards-mascotas"> </section>
+</main>
+    

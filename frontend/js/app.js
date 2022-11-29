@@ -16,6 +16,104 @@ const loadContactanos = () => {
     console.log('Contactos funcionando');
 }
 
+const loadReportes = async () => {
+    console.log('Reportes fucionando');
+    let baseUrl = "http://localhost:8080/";
+    let reportes = [];
+    let cont = 1;
+
+    document.getElementById('change-form').addEventListener('submit', e => {
+        e.preventDefault();
+    })
+
+    function MapearReportes(reporte, cont){
+        const card = document.createElement('div');
+        card.innerHTML = `
+        <h2 class="changelog-h2">0.00.${cont}<span class="changelog-fecha"> (${reporte.fecha})<button class="changelog-btn-eliminar" id="${'delete-'+reporte.reporte_id}")">Eliminar</button><button class="changelog-btn-actualizar" id="${'update-'+reporte.reporte_id}")">Actualizar</button></span></h2>
+        <ul class="changelog-ul">
+            <li class="changelog-li">
+                <span class="changelog-tipo changelog-${reporte.cambio}">${reporte.titulo}</span>
+                <span class="changelog-mensaje">${reporte.contenido}</span>
+            </li>
+        </ul>`;
+        return card;
+    }
+
+    function ImprimirReportes(){
+        let contenedor = document.getElementById("changelog-reportes");
+        contenedor.innerHTML = "";
+
+        reportes.forEach(reporte =>{
+            contenedor.appendChild(MapearReportes(reporte, cont));
+            console.log('delete-'+reporte.reporte_id, 'update-'+reporte.reporte_id);
+            document.getElementById('delete-'+reporte.reporte_id).addEventListener('click', async e => {
+                await fetch(baseUrl + 'reportes/' + reporte.reporte_id,{method:"Delete"}).then(resultado=>{
+                    console.log(resultado);
+                    cont = 1;
+                    cargarRutaRequest('/reportes');
+                });        
+            })
+            document.getElementById('update-'+reporte.reporte_id).addEventListener('click', async e => {
+                let reporteUp = reportes.filter(r=>{return r.reporte_id == reporte.reporte_id})[0];
+
+                document.getElementById('fecha').value = reporteUp.fecha;
+                document.getElementById('titulo').value = reporteUp.titulo;
+                document.getElementById('cambio').value = reporteUp.cambio;
+                document.getElementById('contenido').value = reporteUp.contenido;
+                document.getElementById('reporte_id').value = reporteUp.reporte_id;        
+            })
+            cont += 1;
+        })
+    }
+
+    reportes = await fetch(baseUrl + 'reportes/all')
+        .then(d => d.json())
+        .then(d => d);
+
+    ImprimirReportes();
+
+
+    document.getElementById('boton-enviar').addEventListener('click', async e => {
+        let data ={
+            fecha: document.getElementById("fecha").value,
+            titulo: document.getElementById("titulo").value,
+            cambio: document.getElementById("cambio").value,
+            contenido: document.getElementById("contenido").value
+        };
+
+        await fetch(baseUrl + "reportes",{
+            method:"POST",
+            body: JSON.stringify(data),
+            headers:{
+                "Content-type":'application/json; charset=UTF-8'
+            }
+        }).then(resultado=>{
+            cargarRutaRequest('/reportes')
+        });
+    });
+
+    document.getElementById('boton-actualizar').addEventListener('click', async e => {
+        let data ={
+            fecha: document.getElementById("fecha").value,
+            titulo: document.getElementById("titulo").value,
+            cambio: document.getElementById("cambio").value,
+            contenido: document.getElementById("contenido").value,
+            reporte_id: document.getElementById('reporte_id').value
+        };
+
+        await fetch(baseUrl + "reportes",{
+            method:"PUT",
+            body: JSON.stringify(data),
+            headers:{
+                "Content-type":'application/json; charset=UTF-8'
+            }
+        }).then(resultado=>{
+            cargarRutaRequest('/reportes')
+        });
+    });
+
+}
+
 const loadBusqueda = () => {
 
     console.log('Busqueda funcionando')

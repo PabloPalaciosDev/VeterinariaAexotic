@@ -99,6 +99,14 @@ const rutasPlantillas = {
         loadLogic: loadDescrip,
         preCondition: () => true
     },
+    '/reportes': {
+        title: 'Reportes',
+        imprimirPlantilla: async function () {
+            await imprimirPlantillaGeneralFunction('/frontend/html/changelog.html', this.title);
+        },
+        loadLogic: loadReportes,
+        preCondition: () => true
+    },
     '/user-panel': {
         title: 'Panel de usuario',
         imprimirPlantilla: async function () {

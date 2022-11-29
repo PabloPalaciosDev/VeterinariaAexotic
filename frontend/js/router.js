@@ -107,12 +107,20 @@ const rutasPlantillas = {
         loadLogic: loadReportes,
         preCondition: () => true
     },
-    '/user-panel': {
+    '/user-panel': { // 
         title: 'Panel de usuario',
         imprimirPlantilla: async function () {
             await imprimirPlantillaSessionFunction('/frontend/html/user-profile.html', this.title);
         },
         loadLogic: loadUserPanel,
+        preCondition: async () => await isUserSessionActive()
+    },
+    '/user-panel/edit-user': { // 
+        title: 'Edición de datos de usuario',
+        imprimirPlantilla: async function () {
+            await imprimirPlantillaSessionFunction('/frontend/html/user-edit.html', this.title);
+        },
+        loadLogic: loadUserPanelEdit,
         preCondition: async () => await isUserSessionActive()
     },
     error: {

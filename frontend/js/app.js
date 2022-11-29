@@ -44,7 +44,7 @@ const loadReportes = async () => {
         contenedor.innerHTML = "";
 
         reportes.forEach(reporte =>{
-            contenedor.appendChild(MapearReportes(reporte, cont));
+            contenedor.appendChild( MapearReportes(reporte, cont));
             console.log('delete-'+reporte.reporte_id, 'update-'+reporte.reporte_id);
             document.getElementById('delete-'+reporte.reporte_id).addEventListener('click', async e => {
                 await fetch(baseUrl + 'reportes/' + reporte.reporte_id,{method:"Delete"}).then(resultado=>{
@@ -204,11 +204,8 @@ const loadRegister = async () => {
             cedula: campos[0].value,
             nombre: campos[1].value,
             apellido: campos[2].value,
-            direccion: null,
             email: campos[3].value,
             pass: campos[4].value,
-            foto: null,
-            about: null
         }
 
         const hayUsuarios = await getUsersByIds(newUser.email, newUser.cedula);
@@ -253,4 +250,46 @@ const loadUserPanel = async () => {
         localStorage.removeItem('user')
         window.location.href = '/';
     })
-}   
+}  
+
+const loadUserPanelEdit = () => {
+    const user = JSON.parse(localStorage.getItem('user'));  
+    const campos = [
+        document.getElementById('nombre'),
+        document.getElementById('apellido'),
+    ]
+
+    campos[0].value = user.nombre;
+    campos[1].value = user.apellido;
+
+    validarCamposFormularios(campos, document.getElementById('submit'));
+
+    const form = document.getElementById('form-edit-user');
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const userEdit = {
+            nombre: campos[0].value,
+            apellido: campos[1].value,
+            cedula: user.cedula
+        }
+
+        await fetch(`${host}/cliente/update/`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'put',
+            body: JSON.stringify(userEdit)
+        }).then(d => d.text()).then(d => {
+            user.nombre = userEdit.nombre;
+            user.apellido = userEdit.apellido;
+            localStorage.removeItem('user');
+            localStorage.setItem('user', JSON.stringify(user));
+            cargarRutaRequest('/user-panel')
+        }).catch(e => {
+            console.log('No se pudo')
+            addTemporalError(form, 'No se pudo realizar la modificación');
+        });
+
+    })
+}

@@ -48,13 +48,14 @@ public class ClienteRepository {
     }
 
     public void updateClient(Cliente cliente) {
-        String sql = "UPDATE Cliente SET nombre_cliente = ?, apellido_cliente = ? WHERE cedula_cliente = ?";
+        String sql = "UPDATE Cliente SET nombre_cliente = ?, apellido_cliente = ?, about = ? WHERE cedula_cliente = ?";
         try (
             PreparedStatement preparedStatement = new Conexion().openDB().prepareStatement(sql);
         ) {
             preparedStatement.setString(1, cliente.getNombre());
             preparedStatement.setString(2, cliente.getApellido());
-            preparedStatement.setString(3, cliente.getCedula());
+            preparedStatement.setString(3, cliente.getAbout());
+            preparedStatement.setString(4, cliente.getCedula());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

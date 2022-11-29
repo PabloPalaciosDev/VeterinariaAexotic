@@ -29,6 +29,7 @@ const crearCardsMascotas = (mascotas = [], elementId) => {
             <div class="fs-pet-card-nacimiento">
                 <p>Fecha de nacimiento:</p>
                 <p>${mascota.date}</p>
+                <p>Raza: ${mascota.raza}</p>
             </div>
             <div class="fs-pet-card-nacimiento">
                 <p>Genero:</p>

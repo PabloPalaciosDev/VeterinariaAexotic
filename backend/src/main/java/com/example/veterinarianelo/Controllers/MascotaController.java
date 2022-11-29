@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.veterinarianelo.Models.Mascota;
@@ -15,6 +17,12 @@ public class MascotaController {
     @GetMapping("/mascotas/cliente/{cedula}")
     public List<Mascota> getMasctasByClient (@PathVariable String cedula) {
         return new MascotaRepository().getMascotasIdClient(cedula);
+    }
+
+    @PostMapping("/mascota/add")
+    public Mascota addMascota (@RequestBody Mascota mascota) {
+        new MascotaRepository().agregarMascota(mascota);
+        return mascota;
     }
 
 }

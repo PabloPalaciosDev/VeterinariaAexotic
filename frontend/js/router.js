@@ -39,12 +39,6 @@ const rutasPlantillas = {
         loadLogic: loadHome,
         preCondition: () => true
     },
-    /* '/about': {
-        title: 'About',
-        imprimirPlantilla: async function () {
-            await imprimirPlantillaGeneralFunction('/frontend/html/about.html', this.title, 1);
-        }
-    }, */
     '/servicios': {
         title: 'Servicios',
         imprimirPlantilla: async function () {

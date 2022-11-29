@@ -11,8 +11,8 @@ import com.example.veterinarianelo.Services.RepositorioBusquedaDB;
 
 @RestController
 public class RepositorioBusquedaController {
-    @GetMapping("/repositorio/{tamano_promedio}")
-    public List<RepositorioBusqueda> obtenerRepositorio(@PathVariable("tamano_promedio") String tamano_promedio){
-        return new RepositorioBusquedaDB().obtenerRepositorio(tamano_promedio);
+    @GetMapping("/repositorio/{tipo_animal}")
+    public List<RepositorioBusqueda> obtenerRepositorio(@PathVariable("tipo_animal") String tipo_animal){
+        return new RepositorioBusquedaDB().obtenerRepositorio(tipo_animal);
     }
 }

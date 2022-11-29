@@ -3,8 +3,35 @@ const loadHome = async () => {
     console.log('Home funcionando');
 }
 
-const loadDescrip = () => {
+const loadDescrip = async () => {
+
     console.log('Descripción funcionando')
+    let descripciones = [];
+    
+    await fetch(host+"/descripcion/get").
+    then(resultado =>{
+        resultado.json().then(json =>{
+            descripciones = json;
+            console.log(descripciones);
+            ImprimirDescripcion();
+        })
+    })
+
+    function ImprimirDescripcion(){
+        let contenedor = document.getElementById("sobre-nosotros");
+        descripciones.forEach(descripciones => {
+            contenedor.innerHTML += MapearDescripcion(descripciones);
+        });
+    }
+
+    function MapearDescripcion(descripciones){
+        return `<div class="miembro">
+        <h2>${descripciones.nombre_miembro}</h2>
+        <img width="250" src="${descripciones.foto}" alt="">
+        <p><b>Biografia</b> <br> ${descripciones.bio}</p>
+        <p><b>Cargo</b> <br> ${descripciones.cargo}</p>
+    </div>`;
+    }
 }
 
 const loadServicios = () => {
@@ -124,6 +151,7 @@ const loadBusqueda = () => {
             resultado.json().then(json =>{
                 //busqueda = json;
                 //console.log(busqueda);
+                console.log(busqueda);
                 ImprimirBusqueda(json);
             })
         })
@@ -133,7 +161,7 @@ const loadBusqueda = () => {
 
     formulario_busqueda.addEventListener("submit" , function (evento){
         evento.preventDefault();
-        const busqueda = document.getElementById("tamano_promedio");
+        const busqueda = document.getElementById("tipo_animal");
         document.getElementById("busqueda-contenedor").innerHTML=""
         ObtenerBusqueda(busqueda.value)
     })
@@ -149,6 +177,7 @@ const loadBusqueda = () => {
         return `<section class="busquedas-container">
                 <img  width="150px" height="100px" src="${busqueda.foto}" alt="">
                 <p>Nombre: ${busqueda.nombre_mascota_repo}</p>
+                <p>Tipo de Animal: ${busqueda.tipo_animal}</p>
                 <p>Tamaño promedio: ${busqueda.tamano_promedio}</p>    
                 <p>Peso promedio: ${busqueda.peso_promedio}</p>
                 </section>`;

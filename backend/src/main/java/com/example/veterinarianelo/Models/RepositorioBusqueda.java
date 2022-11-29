@@ -2,7 +2,16 @@ package com.example.veterinarianelo.Models;
 
 public class RepositorioBusqueda {
     private int codigo_mascota_repo;
-    private String nombre_mascota_repo, tamano_promedio, foto, peso_promedio;
+    private String nombre_mascota_repo, tamano_promedio, foto, peso_promedio, tipo_animal;
+    
+    public String getTipo_animal(){
+        return tipo_animal;
+    }
+
+    public void setTipo_animal(String tipo_animal){
+        this.tipo_animal = tipo_animal;
+    }
+
     public int getCodigo_mascota_repo() {
         return codigo_mascota_repo;
     }
@@ -35,10 +44,11 @@ public class RepositorioBusqueda {
     }
     public RepositorioBusqueda() {
     }
-    public RepositorioBusqueda(int codigo_mascota_repo, String nombre_mascota_repo, String tamano_promedio, String foto,
+    public RepositorioBusqueda(int codigo_mascota_repo, String nombre_mascota_repo, String tipo_animal, String tamano_promedio, String foto,
             String peso_promedio) {
         this.codigo_mascota_repo = codigo_mascota_repo;
         this.nombre_mascota_repo = nombre_mascota_repo;
+        this.tipo_animal = tipo_animal;
         this.tamano_promedio = tamano_promedio;
         this.foto = foto;
         this.peso_promedio = peso_promedio;

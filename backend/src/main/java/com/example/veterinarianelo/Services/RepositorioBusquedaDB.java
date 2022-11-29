@@ -16,10 +16,10 @@ public class RepositorioBusquedaDB {
         _cn = new Conexion().openDB();
     }
 
-    public List<RepositorioBusqueda> obtenerRepositorio(String tamano_promedio){
+    public List<RepositorioBusqueda> obtenerRepositorio(String tipo_animal){
         try {
             Statement stnt = _cn.createStatement();
-            String query = "select * from Repositorio_Mascotas_Exoticas where tamano_promedio = '"+tamano_promedio+"'";
+            String query = "select * from Repositorio_Mascotas_Exoticas where tipo_animal = '"+tipo_animal+"'";
 
             List<RepositorioBusqueda> mascotas_repo = new ArrayList<>();
 
@@ -29,6 +29,7 @@ public class RepositorioBusquedaDB {
                 RepositorioBusqueda mascota_repo = new RepositorioBusqueda(
                     result.getInt("codigo_mascota_repo"),
                     result.getString("nombre_mascota_repo"),
+                    result.getString("tipo_animal"),
                     result.getString("tamano_promedio"),
                     result.getString("foto"),
                     result.getString("peso_promedio")

@@ -11,7 +11,7 @@ public class Conexion {
             String connectionUrl = "jdbc:sqlserver://localhost:1433;"
             + "databaseName=VeterinariaAexotic;"
             + "user=sa;"
-            + "password=12345678;"
+            + "password=KKdeperro123;"
             + "trustServerCertificate=true";
             Connection con = DriverManager.getConnection(connectionUrl);
             return con;

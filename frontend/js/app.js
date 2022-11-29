@@ -382,3 +382,42 @@ const loadAddPet = async () => {
         });
     })
 }
+
+const loadEditPet = async () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const mascota = await fetch(`${host}/mascota/${mascotaEnEdicion}`)
+        .then(d=>d.json()).then(d=>d)
+
+    const campos = [
+        document.getElementById('nombre'), //0
+        document.getElementById('peso'),// 1
+        document.getElementById('tamano'),// 2 
+        document.getElementById('fecha'),// 3
+        document.getElementById('genero'),// 4
+        document.getElementById('raza')// 5
+    ]
+
+    const razas = await fetch(`${host}/razas/all`)
+        .then(d => d.json()).then(d => d);
+
+    razas.forEach(raza => {
+        campos[5].innerHTML += `<option value="${raza.codigo}">${raza.raza}</option>`;
+    })
+
+    campos[0].value = mascota.nombre;
+    campos[1].value = mascota.peso;
+    campos[2].value = mascota.tamano;
+    campos[3].value = mascota.date;
+    campos[4].value = mascota.genero;
+    campos[5].value = mascota.raza;
+
+    //TODO: ACABAR ESTO
+
+    const form = document.getElementById('form-pet-user');
+
+    validarCamposFormularios(campos, document.getElementById('submit'));
+
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
+    })
+}

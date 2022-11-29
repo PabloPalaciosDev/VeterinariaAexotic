@@ -25,4 +25,9 @@ public class MascotaController {
         return mascota;
     }
 
+    @GetMapping("/mascota/{petcode}")
+    public Mascota getMascotaById (@PathVariable int petcode) {
+        return new MascotaRepository().getMascotaById(petcode);
+    }
+
 }

@@ -33,6 +33,22 @@ public class MascotaRepository {
         }
     }
 
+    public Mascota getMascotaById (int petcode) {
+        String sql = "SELECT "+codigo+campos+" FROM Mascotas_Exoticas_Cliente AS m JOIN Raza AS r ON m.codigo_raza = r.codigo_raza WHERE codigo_mascota = "+petcode+"";
+        Mascota mascota = new Mascota();
+        try (
+            Statement statement = new Conexion().openDB().createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+        ) {
+            while (resultSet.next()) {
+                createMascota(mascota, resultSet);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mascota;
+    }
+
     public List<Mascota> getMascotasIdClient (String cedula) {
         List<Mascota> lista = new ArrayList<>();
         String sql = "SELECT "+codigo+campos+" FROM Mascotas_Exoticas_Cliente AS m JOIN Raza AS r ON m.codigo_raza = r.codigo_raza WHERE cedula_cliente = '"+cedula+"'";

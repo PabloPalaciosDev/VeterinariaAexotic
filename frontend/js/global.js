@@ -43,6 +43,7 @@ const crearCardsMascotas = (mascotas = [], elementId) => {
         document.getElementById(elementId).appendChild(article);
         document.getElementById(mascota.id).addEventListener('click', e => {
             mascotaEnEdicion = mascota.id;
+            cargarRutaRequest('/user-panel/edit-pet');
         });
     });
 }

@@ -125,6 +125,14 @@ const rutasPlantillas = {
         loadLogic: loadAddPet,
         preCondition: async () => await isUserSessionActive()
     },
+    '/user-panel/edit-pet': { 
+        title: 'Modificar mascota',
+        imprimirPlantilla: async function () {
+            await imprimirPlantillaSessionFunction('/frontend/html/edit-pet.html', this.title);
+        },
+        loadLogic: loadEditPet,
+        preCondition: async () => await isUserSessionActive()
+    },
     error: {
         title: 'Error',
         imprimirPlantilla: async function () {

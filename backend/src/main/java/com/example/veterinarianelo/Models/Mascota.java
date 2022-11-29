@@ -1,6 +1,13 @@
 package com.example.veterinarianelo.Models;
 
 public class Mascota {
+    private String cedulacli;
+    public String getCedulacli() {
+        return cedulacli;
+    }
+    public void setCedulacli(String cedulacli) {
+        this.cedulacli = cedulacli;
+    }
     private int id;
     private String nombre;
     private String peso;
@@ -8,6 +15,13 @@ public class Mascota {
     private String date;
     private String genero;
     private String raza;
+    private int codigoraza;
+    public int getCodigoraza() {
+        return codigoraza;
+    }
+    public void setCodigoraza(int codigoraza) {
+        this.codigoraza = codigoraza;
+    }
     private String foto;
     public String getFoto() {
         return foto;

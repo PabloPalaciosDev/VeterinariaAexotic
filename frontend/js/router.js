@@ -101,12 +101,28 @@ const rutasPlantillas = {
         loadLogic: loadReportes,
         preCondition: () => true
     },
-    '/user-panel': {
+    '/user-panel': { 
         title: 'Panel de usuario',
         imprimirPlantilla: async function () {
             await imprimirPlantillaSessionFunction('/frontend/html/user-profile.html', this.title);
         },
         loadLogic: loadUserPanel,
+        preCondition: async () => await isUserSessionActive()
+    },
+    '/user-panel/edit-user': { // '/user-panel/add-pet'
+        title: 'Edición de datos de usuario',
+        imprimirPlantilla: async function () {
+            await imprimirPlantillaSessionFunction('/frontend/html/user-edit.html', this.title);
+        },
+        loadLogic: loadUserPanelEdit,
+        preCondition: async () => await isUserSessionActive()
+    },
+    '/user-panel/add-pet': { 
+        title: 'Agregar mascota',
+        imprimirPlantilla: async function () {
+            await imprimirPlantillaSessionFunction('/frontend/html/add-pet.html', this.title);
+        },
+        loadLogic: loadAddPet,
         preCondition: async () => await isUserSessionActive()
     },
     error: {

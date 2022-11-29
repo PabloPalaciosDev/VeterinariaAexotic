@@ -67,6 +67,36 @@ public class MascotaRepository {
         return lista;
     }
 
+    public void updateMascota (Mascota mascota) {
+        String sql = "update Mascotas_Exoticas_Cliente set nombre_mascota = ?, peso = ?, tamano = ?, fecha_nac = ?, genero = ?, codigo_raza = ? WHERE codigo_mascota = ?";
+        try (
+            PreparedStatement preparedStatement = new Conexion().openDB().prepareStatement(sql);
+        ) {
+            preparedStatement.setString(1, mascota.getNombre());
+            preparedStatement.setString(2, mascota.getPeso());
+            preparedStatement.setString(3, mascota.getTamano());
+            preparedStatement.setString(4, mascota.getDate());
+            preparedStatement.setString(5, mascota.getGenero());
+            preparedStatement.setInt(6, mascota.getCodigoraza());
+            preparedStatement.setInt(7, mascota.getId());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }   
+
+    public void deleteMascota (int id) {
+        String sql = "DELETE FROM Mascotas_Exoticas_Cliente WHERE codigo_mascota = ?";
+        try (
+            PreparedStatement preparedStatement = new Conexion().openDB().prepareStatement(sql)
+        ) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void createMascota (Mascota mascota, ResultSet resultSet) throws SQLException {
         mascota.setId(resultSet.getInt(1));
         mascota.setNombre(resultSet.getString(2));

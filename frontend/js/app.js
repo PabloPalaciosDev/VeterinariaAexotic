@@ -397,6 +397,15 @@ const loadEditPet = async () => {
         document.getElementById('raza')// 5
     ]
 
+    document.getElementById('eliminarPet').addEventListener('click', async e => {
+        console.log('EL evento se ejecuta')
+        await fetch(`${host}/mascota/borrar/${mascota.id}`, {
+            method: 'delete'
+        }).then(e => e.json()).then(e => {
+            cargarRutaRequest('/user-panel');
+        });
+    });
+
     const razas = await fetch(`${host}/razas/all`)
         .then(d => d.json()).then(d => d);
 
@@ -409,9 +418,6 @@ const loadEditPet = async () => {
     campos[2].value = mascota.tamano;
     campos[3].value = mascota.date;
     campos[4].value = mascota.genero;
-    campos[5].value = mascota.raza;
-
-    //TODO: ACABAR ESTO
 
     const form = document.getElementById('form-pet-user');
 
@@ -419,5 +425,29 @@ const loadEditPet = async () => {
 
     form.addEventListener('submit', async e => {
         e.preventDefault();
+
+        const editMascota = {
+            id: mascota.id,
+            cedulacli: user.cedula,
+            nombre: campos[0].value,
+            peso: campos[1].value,
+            tamano: campos[2].value,
+            date: campos[3].value,
+            genero: campos[4].value,
+            codigoraza: Number.parseInt(campos[5].value)
+        };
+
+        await fetch(`${host}/mascotas/update/`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'put',
+            body: JSON.stringify(editMascota)
+        }).then(d => d.json()).then(d => {
+            addTemporalSucces(form, '¡Mascota actualizada correctamente! (✿◡‿◡)');
+        }).catch(e => {
+            addTemporalError(form, 'No se edito');
+        });
     })
 }

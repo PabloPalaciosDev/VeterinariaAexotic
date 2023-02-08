@@ -1,6 +1,5 @@
 package com.example.veterinarianelo.Models;
 
-
 public class Descripcion {
     private String nombre_miembro,foto,bio,cargo;
 

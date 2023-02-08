@@ -29,6 +29,7 @@ const crearCardsMascotas = (mascotas = [], elementId) => {
             <div class="fs-pet-card-nacimiento">
                 <p>Fecha de nacimiento:</p>
                 <p>${mascota.date}</p>
+                <p>Raza: ${mascota.raza}</p>
             </div>
             <div class="fs-pet-card-nacimiento">
                 <p>Genero:</p>
@@ -42,6 +43,7 @@ const crearCardsMascotas = (mascotas = [], elementId) => {
         document.getElementById(elementId).appendChild(article);
         document.getElementById(mascota.id).addEventListener('click', e => {
             mascotaEnEdicion = mascota.id;
+            cargarRutaRequest('/user-panel/edit-pet');
         });
     });
 }

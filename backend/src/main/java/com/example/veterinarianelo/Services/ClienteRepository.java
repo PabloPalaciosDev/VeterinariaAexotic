@@ -47,6 +47,21 @@ public class ClienteRepository {
         return cliente;
     }
 
+    public void updateClient(Cliente cliente) {
+        String sql = "UPDATE Cliente SET nombre_cliente = ?, apellido_cliente = ?, about = ? WHERE cedula_cliente = ?";
+        try (
+            PreparedStatement preparedStatement = new Conexion().openDB().prepareStatement(sql);
+        ) {
+            preparedStatement.setString(1, cliente.getNombre());
+            preparedStatement.setString(2, cliente.getApellido());
+            preparedStatement.setString(3, cliente.getAbout());
+            preparedStatement.setString(4, cliente.getCedula());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void registerCliente (Cliente cliente) {
         String sql = "INSERT INTO Cliente VALUES (?, ?, ?, ?, ?, ?, ?, ?)";        
         try (

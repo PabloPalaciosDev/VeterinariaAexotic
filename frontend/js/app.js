@@ -71,7 +71,7 @@ const loadReportes = async () => {
         contenedor.innerHTML = "";
 
         reportes.forEach(reporte =>{
-            contenedor.appendChild(MapearReportes(reporte, cont));
+            contenedor.appendChild( MapearReportes(reporte, cont));
             console.log('delete-'+reporte.reporte_id, 'update-'+reporte.reporte_id);
             document.getElementById('delete-'+reporte.reporte_id).addEventListener('click', async e => {
                 await fetch(baseUrl + 'reportes/' + reporte.reporte_id,{method:"Delete"}).then(resultado=>{
@@ -233,11 +233,8 @@ const loadRegister = async () => {
             cedula: campos[0].value,
             nombre: campos[1].value,
             apellido: campos[2].value,
-            direccion: null,
             email: campos[3].value,
             pass: campos[4].value,
-            foto: null,
-            about: null
         }
 
         const hayUsuarios = await getUsersByIds(newUser.email, newUser.cedula);
@@ -275,11 +272,182 @@ const loadUserPanel = async () => {
     `;
     const mascotas = await fetch(`${host}/mascotas/cliente/${user.cedula}`).then(d => d.json()).then(d => d);
 
-    crearCardsMascotas(mascotas, 'cards-mascotas');
+    console.log(mascotas);
 
+    crearCardsMascotas(mascotas, 'cards-mascotas');
 
     document.getElementById('cerrarSession').addEventListener('click', e => {
         localStorage.removeItem('user')
-        window.location.href = '/';
+        cargarRutaRequest('/login');
     })
-}   
+
+    document.getElementById('addMascota').addEventListener('click', e => {
+        cargarRutaRequest('/user-panel/add-pet')
+    })
+}  
+
+const loadUserPanelEdit = () => {
+    const user = JSON.parse(localStorage.getItem('user'));  
+    const campos = [
+        document.getElementById('nombre'),
+        document.getElementById('apellido'),
+        document.getElementById('about')
+    ]
+
+    campos[0].value = user.nombre;
+    campos[1].value = user.apellido;
+    campos[2].value = user.about;
+
+    validarCamposFormularios(campos, document.getElementById('submit'));
+
+    const form = document.getElementById('form-edit-user');
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const userEdit = {
+            nombre: campos[0].value,
+            apellido: campos[1].value,
+            about: campos[2].value,
+            cedula: user.cedula
+        }
+
+        await fetch(`${host}/cliente/update/`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'put',
+            body: JSON.stringify(userEdit)
+        }).then(d => d.text()).then(d => {
+            user.nombre = userEdit.nombre;
+            user.apellido = userEdit.apellido;
+            user.about = userEdit.about;
+            localStorage.removeItem('user');
+            localStorage.setItem('user', JSON.stringify(user));
+            addTemporalSucces(form, 'Se ha modificador correctamente');
+        }).catch(e => {
+            console.log('No se pudo')
+            addTemporalError(form, 'No se pudo realizar la modificación');
+        });
+
+    })
+}
+
+const loadAddPet = async () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const campos = [
+        document.getElementById('nombre'), //0
+        document.getElementById('peso'),// 1
+        document.getElementById('tamano'),// 2 
+        document.getElementById('fecha'),// 3
+        document.getElementById('genero'),// 4
+        document.getElementById('raza')// 5
+    ]
+
+    const razas = await fetch(`${host}/razas/all`)
+        .then(d => d.json()).then(d => d);
+
+    razas.forEach(raza => {
+        campos[5].innerHTML += `<option value="${raza.codigo}">${raza.raza}</option>`;
+    })
+
+    const form = document.getElementById('form-pet-user');
+
+    validarCamposFormularios(campos, document.getElementById('submit'));
+
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
+
+        const newMascota = {
+            cedulacli: user.cedula,
+            nombre: campos[0].value,
+            peso: campos[1].value,
+            tamano: campos[2].value,
+            date: campos[3].value,
+            genero: campos[4].value,
+            codigoraza: Number.parseInt(campos[5].value),
+        };
+
+
+        await fetch(`${host}/mascota/add`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'post',
+            body: JSON.stringify(newMascota)
+        }).then(d => d.text()).then(d => {
+            addTemporalSucces(form, '¡Mascota agregada correctamente! q(≧▽≦q)');
+        }).catch(e => {
+            addTemporalError(form, 'La mascota no se pudo agregar');
+        });
+    })
+}
+
+const loadEditPet = async () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const mascota = await fetch(`${host}/mascota/${mascotaEnEdicion}`)
+        .then(d=>d.json()).then(d=>d)
+
+    const campos = [
+        document.getElementById('nombre'), //0
+        document.getElementById('peso'),// 1
+        document.getElementById('tamano'),// 2 
+        document.getElementById('fecha'),// 3
+        document.getElementById('genero'),// 4
+        document.getElementById('raza')// 5
+    ]
+
+    document.getElementById('eliminarPet').addEventListener('click', async e => {
+        console.log('EL evento se ejecuta')
+        await fetch(`${host}/mascota/borrar/${mascota.id}`, {
+            method: 'delete'
+        }).then(e => e.json()).then(e => {
+            cargarRutaRequest('/user-panel');
+        });
+    });
+
+    const razas = await fetch(`${host}/razas/all`)
+        .then(d => d.json()).then(d => d);
+
+    razas.forEach(raza => {
+        campos[5].innerHTML += `<option value="${raza.codigo}">${raza.raza}</option>`;
+    })
+
+    campos[0].value = mascota.nombre;
+    campos[1].value = mascota.peso;
+    campos[2].value = mascota.tamano;
+    campos[3].value = mascota.date;
+    campos[4].value = mascota.genero;
+
+    const form = document.getElementById('form-pet-user');
+
+    validarCamposFormularios(campos, document.getElementById('submit'));
+
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
+
+        const editMascota = {
+            id: mascota.id,
+            cedulacli: user.cedula,
+            nombre: campos[0].value,
+            peso: campos[1].value,
+            tamano: campos[2].value,
+            date: campos[3].value,
+            genero: campos[4].value,
+            codigoraza: Number.parseInt(campos[5].value)
+        };
+
+        await fetch(`${host}/mascotas/update/`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'put',
+            body: JSON.stringify(editMascota)
+        }).then(d => d.json()).then(d => {
+            addTemporalSucces(form, '¡Mascota actualizada correctamente! (✿◡‿◡)');
+        }).catch(e => {
+            addTemporalError(form, 'No se edito');
+        });
+    })
+}

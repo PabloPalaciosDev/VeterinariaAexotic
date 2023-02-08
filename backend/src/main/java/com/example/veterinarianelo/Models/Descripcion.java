@@ -1,6 +1,5 @@
 package com.example.veterinarianelo.Models;
 
-import java.util.List;
 
 public class Descripcion {
     private String nombre_miembro,foto,bio,cargo;

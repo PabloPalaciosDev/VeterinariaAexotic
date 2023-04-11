@@ -9,6 +9,7 @@ public class Cliente {
     private String pass;
     private String foto;
     private String about;
+    
     public String getFoto() {
         return foto;
     }

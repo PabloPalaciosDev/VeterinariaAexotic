@@ -3,8 +3,7 @@ const host = "http://localhost:8080";
 
 let mascotaEnEdicion = 0;
 
-const getUsersByIds = async (email, cedula) => await fetch(`${host}/clientes/${email}/${cedula}`) 
-                                                          .then(d => d.json()).then(d => d);
+const getUsersByIds = async (email, cedula) => await fetch(`${host}/clientes/${email}/${cedula}`).then(d => d.json()).then(d => d);
 
 const isUserSessionActive = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -57,7 +56,7 @@ const crearCardUser = (idOfElement) => {
             <img class="fs-img" src="/frontend/img/user.png" alt="user">
         </figure>
         <div>
-            <h2>${user.nombre+' '+user.apellido}</h2>
+            <h2>${user.nombre+' '+ user.apellido}</h2>
             <p>@${user.cedula}</p>
         </div>
         <div class="fs-float-button pointer" onclick="cargarRutaRequest('/user-panel/edit-user')">

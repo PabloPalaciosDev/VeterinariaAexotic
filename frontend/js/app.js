@@ -5,9 +5,10 @@ const loadHome = async () => {
 
 const loadDescrip = async () => {
 
+    //arreglo vacio creado
     console.log('Descripción funcionando')
     let descripciones = [];
-    
+    //extraccion de los datos del endpoint del controlador DescripcionController en formato json
     await fetch(host+"/descripcion/get").
     then(resultado =>{
         resultado.json().then(json =>{
@@ -17,6 +18,7 @@ const loadDescrip = async () => {
         })
     })
 
+    //funcion que imprime todos los elementos guardados en el arreglo descripciones previamente creado
     function ImprimirDescripcion(){
         let contenedor = document.getElementById("sobre-nosotros");
         descripciones.forEach(descripciones => {
@@ -24,6 +26,7 @@ const loadDescrip = async () => {
         });
     }
 
+    //funcion que una vez extraido los datos de del arreglo, asigna un formato para ser impreso en html en la funcion de imprimir descripcion
     function MapearDescripcion(descripciones){
         return `<div class="miembro">
         <h2>${descripciones.nombre_miembro}</h2>
